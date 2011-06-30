@@ -23,8 +23,8 @@ projects[transliteration][version] = 3.0
 
 ; Profiles ====================================================================
 
-projects[simple][type] = profile
-projects[simple][download][type] = git
-projects[simple][download][url] = git://github.com/trexart/basesite.git
-;projects[simple][download][branch] = 6.x
-projects[simple][download][branch] = master
+projects[basesite][type] = profile
+projects[basesite][download][type] = git
+projects[basesite][download][url] = git://github.com/trexart/basesite.git
+;projects[basesite][download][branch] = 6.x
+projects[basesite][download][branch] = master
