@@ -1,8 +1,5 @@
 <?php
 
-//!function_exists('profiler_v2') ? require_once('libraries/profiler/profiler.inc') : FALSE;
-//profiler_v2('basesite');
-
 /**
 * @file
 *   This file contains an example Drupal 6 Install Profile. It is based on the default installation profile and comments
@@ -36,7 +33,7 @@ function basesite_profile_modules() {
       // Boxes
       'boxes',
       // Content
-      'content', 'optionswidgets', 'text',
+      'content', 'optionwidgets', 'text',
       // CTools
       'ctools',
       // Context
@@ -52,7 +49,7 @@ function basesite_profile_modules() {
       // Libraries
       'libraries',
       // Google Analytics
-      'google_analytics',
+      'googleanalytics',
       // Poormanscron
       'poormanscron',
       // Strongarm
@@ -121,7 +118,7 @@ function basesite_profile_tasks(&$task, $url) {
       'type' => 'page',
       'name' => st('Page'),
       'module' => 'node',
-      'description' => st("A <em>page</em> is a simple method for creating and displaying information that rarely changes, such as an \"About us\" section of a website. By default, a <em>page</em> entry does not allow visitor comments.");
+      'description' => st("A <em>page</em> is a simple method for creating and displaying information that rarely changes, such as an \"About us\" section of a website. By default, a <em>page</em> entry does not allow visitor comments."),
       'custom' => TRUE,
       'modified' => TRUE,
       'locked' => FALSE,
@@ -146,7 +143,7 @@ function basesite_profile_tasks(&$task, $url) {
 
   // Set the preferred theme.
   $themes = system_theme_data();
-  $preferred_themes = array('rubik', 'garland');
+  $preferred_themes = array('cube', 'rubik');
   foreach ($preferred_themes as $theme) {
     if (array_key_exists($theme, $themes)) {
       system_initialize_theme_blocks($theme);
@@ -160,11 +157,23 @@ function basesite_profile_tasks(&$task, $url) {
   variable_set('allowed_html_1', '<a> <em> <strong> <cite> <blockquote> <code> <ul> <ol> <li> <dl> <dt> <dd> <ins> <del> <p> <br> <h3> <h4>');
 
   // Set timezone for date_timezone.module.
-  variable_set('date_default_timezone', -14400);
-  variable_set('date_default_timezone_name', 'America/Detroit');
+  variable_set('date_default_timezone', 36000);
+  variable_set('date_default_timezone_name', 'Australia/Sydney');
+  variable_set('date_first_day', '1');
+  
+  // set date formats
+  variable_set('date_format_long', 'l, j F Y - g:ia');
+  variable_set('date_format_medium', 'D, d/m/Y - g:ia');
+  variable_set('date_format_short', 'd/m/Y - g:ia');
+  
+  // set date popup value
+  variable_set('date_popup_css_file', 'sites/all/modules/contrib/jquery_ui/jquery.ui/themes/default/ui.datepicker.css');
+  
+  // Set site name for anonymous user
+  variable_set('anonymous', 'Guest');
 
   // Set site_footer value.
-  variable_set('site_footer', st('&copy; Copyright 2010 by Nobody Special. All rights reserved.'));
+  variable_set('site_footer', st('&copy; Copyright 2011 by Base Site. All rights reserved.'));
 
   // Configure access log for statistics module.
   variable_set('statistics_count_content_views', '0');
@@ -173,64 +182,13 @@ function basesite_profile_tasks(&$task, $url) {
 
   // Configure user settings. Set user creation to administrator only.
   variable_set('user_register', '0');
-
-  // Build Custom menus and set default node menu.
-
-  $menu = array(
-    'menu_name' => 'menu-site',
-    'title' => 'Site Menu',
-    'description' => 'This is the default menu that users will see.'
-  );
-  drupal_write_record('menu_custom', $menu);
-
-  $menu = array(
-    'menu_name' => 'menu-footer-links',
-    'title' => 'Footer Links',
-    'description' => 'These links will appear in the site footer. Your theme should display them as an inline list.'
-  );
-  drupal_write_record('menu_custom', $menu);
-
-  variable_set('menu_default_node_menu', 'menu-site');
-
-  $link = array('menu_name' => 'menu-footer-links', 'link_path' => 'contact', 'link_title' => 'Contact Us', 'weight' => 5);
-
-  $link = array('menu_name' => 'menu-site', 'link_path' => '<front>', 'link_title' => 'Home', 'weight' => -50);
-  menu_link_save($link);
-
-  $link = array('menu_name' => 'menu-site', 'link_path' => 'user/login', 'link_title' => 'Log In', 'weight' => 49);
-  menu_link_save($link);
-
-  $link = array('menu_name' => 'menu-site', 'link_path' => 'logout', 'link_title' => 'Logout', 'weight' => 50);
-  menu_link_save($link);
-
-  // Configure visible blocks.
-  // Disable all default blocks for current theme and enable the two custom menus created above.
-
-  db_query("UPDATE {blocks} SET status = 0 where theme = '%s'", $theme);
-
-  $block = array(
-    'module' => 'menu',
-    'delta' => 'menu-footer-links',
-    'theme' => $theme,
-    'status' => 1,
-    'region' => 'footer',
-    'title' => '<none>'
-  );
-  drupal_write_record('blocks', $block);
-
-  $block = array(
-    'module' => 'menu',
-    'delta' => 'menu-site',
-    'theme' => $theme,
-    'status' => 1,
-    'region' => 'left',
-    'title' =>  '<none>'
-  );
-  drupal_write_record('blocks', $block);
+  
+  // set default temp folder
+  variable_set('file_directory_temp', 'sites/default/tmp');
 
   // Create custom roles and set initial permissions.
 
-  $role = array('name' => 'editor');
+  /*$role = array('name' => 'editor');
   drupal_write_record('role', $role);
   $role = array('name' => 'ninja');
   drupal_write_record('role', $role);
@@ -238,7 +196,7 @@ function basesite_profile_tasks(&$task, $url) {
   db_query("UPDATE {permission} SET perm = 'access content, search content, view uploaded files' WHERE rid = 1");
   db_query("UPDATE {permission} SET perm = 'view advanced help index, view advanced help popup, view advanced help topic, access content, search content, use advanced search, upload files, view uploaded files, access user profiles' WHERE rid = 2");
   db_query("INSERT INTO {permission} (rid, perm, tid) VALUES(3, 'upload files', 0)");
-  db_query("INSERT INTO {permission} (rid, perm, tid) VALUES(4, 'perform backup, administer blocks, administer menu, administer nodes, create url aliases, access statistics, access administration pages, access site reports, upload files', 0)");
+  db_query("INSERT INTO {permission} (rid, perm, tid) VALUES(4, 'perform backup, administer blocks, administer menu, administer nodes, create url aliases, access statistics, access administration pages, access site reports, upload files', 0)");*/
 
   // Create Home Page.
 
@@ -254,17 +212,6 @@ function basesite_profile_tasks(&$task, $url) {
   node_save($node);
 
   variable_set('site_frontpage', 'node/1');
-
-  // Configure Core Profile Module.
-
-  $profile = array(
-    'title' => 'Full Name',
-    'name' => 'profile_fullname',
-    'category' => 'Personal Information',
-    'type' => 'textfield',
-    'visibility' => 2
-  );
-  drupal_write_record('profile_fields', $profile);
 
   // Update the menu router information.
   menu_rebuild();
