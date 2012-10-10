@@ -133,7 +133,7 @@ function basesite_profile_tasks(&$task, $url) {
   }
 
   // Default page to not be promoted and have comments disabled.
-  variable_set('node_options_page', array('status', 'revision'));
+  variable_set('node_options_page', array('status'));
   variable_set('comment_page', COMMENT_NODE_DISABLED);
 
   // Don't display date and author information for page nodes by default.
@@ -200,7 +200,7 @@ function basesite_profile_tasks(&$task, $url) {
 
   // Create Home Page.
 
-  $node = new StdClass();
+  /*$node = new StdClass();
   $node->type = 'page';
   $node->status = 1;
   $node->promote = 0;
@@ -211,7 +211,7 @@ function basesite_profile_tasks(&$task, $url) {
   $node->body = st('Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.');
   node_save($node);
 
-  variable_set('site_frontpage', 'node/1');
+  variable_set('site_frontpage', 'node/1');*/
 
   // Update the menu router information.
   menu_rebuild();
