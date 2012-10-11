@@ -4,8 +4,7 @@ core = 7.x
 ; Includes ====================================================================
 ; Include Build Kit install profile makefile via URL
 includes[] = https://raw.github.com/trexart/buildkit/master/buildkit.make
-
-;includes[] = https://raw.github.com/trexart/buildkit/master/standard.make
+;includes[] = http://drupalcode.org/project/buildkit.git/blob_plain/refs/heads/7.x-2.x:/drupal-org.make
 
 ; Modules =====================================================================
 
