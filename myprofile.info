@@ -3,14 +3,26 @@ core = 7.x
 description = Get started fast on a site build.
 
 ; Core
-dependencies[] = book
-dependencies[] = contact
-dependencies[] = dblog
-dependencies[] = field_ui
-dependencies[] = file
+dependencies[] = block
+dependencies[] = contextual
+dependencies[] = dashboard
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
 dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
 dependencies[] = path
 dependencies[] = taxonomy
+dependencies[] = syslog
+dependencies[] = search
+dependencies[] = shortcut
+dependencies[] = toolbar
+dependencies[] = overlay
+dependencies[] = field
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = rdf
 
 ; Contrib
 dependencies[] = admin

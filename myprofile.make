@@ -25,9 +25,9 @@ includes[] = https://raw.github.com/trexart/buildkit/master/buildkit.make
 ;projects[entity][subdir] = contrib
 ;projects[entity][version] = 1.0-rc3
 
-;projects[entitycache][type] = "module"
-;projects[entitycache][subdir] = "contrib"
-;projects[entitycache][version] = "1.0"
+;projects[entitycache][type] = module
+;projects[entitycache][subdir] = contrib
+;projects[entitycache][version] = 1.1
 
 ;projects[feeds][type] = "module"
 ;projects[feeds][subdir] = "contrib"
