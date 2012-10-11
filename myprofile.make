@@ -48,6 +48,10 @@ includes[] = https://raw.github.com/trexart/buildkit/master/buildkit.make
 ;projects[libraries][subdir] = contrib
 ;projects[libraries][version] = 2.0
 
+;projects[link][type] = module
+;projects[link][subdir] = contrib
+;projects[link][version] = 1.0
+
 ;projects[panels][type] = module
 ;projects[panels][subdir] = contrib
 ;projects[panels][version] = 3.3
